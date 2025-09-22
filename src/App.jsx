@@ -14,7 +14,12 @@ function App() {
       <p><strong>Genero:</strong>Masculino</p>
       <p><strong>Ultimo ep:</strong> Ep. 41</p>
     
+      <button onClick={() => ('Botão clicado!')}>
+        Trocar de personagem
+      </button>
+
     </div>
+
   )
 }
 
