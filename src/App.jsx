@@ -1,27 +1,46 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
+  const [personagem, setPersonagem] = useState(null)
+
+  const soma1 = () => {
+    if (count + 1 <= 826) {
+      setCount(count + 1)
+    } else {
+      setCount(1)
+    }
+  }
+
+  useEffect(() => {
+    fetch(`https://rickandmortyapi.com/api/character/${count}`)
+      .then(res => res.json())
+      .then(data => setPersonagem(data))
+      .catch(err => console.error("Erro ao buscar personagem:", err))
+  }, [count])
 
   return (
     <div className='site'>
-      <img src="https://tm.ibxk.com.br/2022/11/22/22143022553305.jpg" alt="Rick" />
+      {personagem && (
+        <>
+          <img src={personagem.image} alt={personagem.name} />
+          <h2>{personagem.name}</h2>
+          <p><strong>Status:</strong> {personagem.status}</p>
+          <p><strong>Espécie:</strong> {personagem.species}</p>
+          <p><strong>Gênero:</strong> {personagem.gender}</p>
+          <p><strong>Último ep:</strong> Ep. {personagem.episode.length}</p>
+        </>
+      )}
 
-      <h2>Rick</h2>
-      <p><strong>status:</strong>Vivinho</p>
-      <p><strong>Especie:</strong>Humano</p>
-      <p><strong>Genero:</strong>Masculino</p>
-      <p><strong>Ultimo ep:</strong> Ep. 41</p>
-    
-      <button onClick={() => ('Botão clicado!')}>
+      <button onClick={() => {
+        soma1()
+        console.log(count)
+      }}>
         Trocar de personagem
       </button>
-
     </div>
-
   )
 }
 
-export default App
-;
+export default App;
