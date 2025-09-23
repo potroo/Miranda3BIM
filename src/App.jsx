@@ -29,7 +29,7 @@ function App() {
           <p><strong>Status:</strong> {personagem.status}</p>
           <p><strong>species:</strong> {personagem.species}</p>
           <p><strong>Gender:</strong> {personagem.gender}</p>
-          <p><strong>Último ep:</strong> Ep. {personagem.episode.length}</p>
+          <p><strong>episode:</strong> Ep. {personagem.episode.length}</p>
         </>
       )}
 
